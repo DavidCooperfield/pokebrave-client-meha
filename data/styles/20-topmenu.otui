@@ -1,0 +1,84 @@
+TopButton < UIButton
+  width: 36
+  opacity: 1
+  icon-color: white
+  image-color: white
+  
+  $hover !checked:
+    icon-color: #B11C3A
+    image-color: #B11C3A
+
+  $disabled:
+    icon-color: green
+    image-color: green
+
+  $checked:
+    icon-color: #B11C3A
+    image-color: #B11C3A
+
+
+TopToggleButton < UIButton
+  size: 36 36
+
+TopMenuButtonsPanel < Panel
+  layout:
+    type: horizontalBox
+    spacing: 4
+    fit-children: true
+  padding: 6 4
+
+TopMenuPanel < Panel
+  height: 30
+  margin-top: 12
+  focusable: false
+
+TopMenuFrameCounterLabel < Label
+  font: verdana-11px-rounded
+  color: white
+  margin-top: 4
+  margin-left: 4
+
+TopMenuPingLabel < Label
+  font: verdana-11px-rounded
+
+TopMenu < TopMenuPanel
+  id: topMenu
+  width: 800
+  anchors.centerIn: parent.centerIn
+  anchors.top: parent.top
+
+  TopMenuButtonsPanel
+    id: leftButtonsPanel
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+
+  TopMenuButtonsPanel
+    id: leftGameButtonsPanel
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
+    anchors.left: prev.right
+    margin-left: -3
+    visible: false
+
+  TopMenuButtonsPanel
+    id: rightButtonsPanel
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
+    anchors.left: prev.right
+    margin-left: 0
+
+  TopMenuButtonsPanel
+    id: rightGameButtonsPanel
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
+    anchors.left: prev.right
+    margin-left: 0
+    visible: false
+
+  TopMenuFrameCounterLabel
+    id: fpsLabel
+    anchors.top: prev.top
+    anchors.left: prev.right
+    text-auto-resize: true
+

@@ -1,0 +1,65 @@
+CheckBox < UICheckBox
+  size: 14 14
+  text-align: left
+  text-offset: 16 0
+  color: #D7D7D7
+  image-color: #ffffffff
+  image-rect: 0 0 14 14
+  image-offset: 0 2
+  image-source: /images/ui/checkbox
+
+  $hover !disabled:
+    color: white
+
+  $!checked:
+    image-clip: 0 14 14 14
+
+  $hover !checked:
+
+  $checked:
+    image-clip: 0 0 14 14
+
+  $hover checked:
+
+  $disabled:
+    image-color: #ffffff88
+    color: #aaaaaa88
+
+ColorBox < UICheckBox
+  size: 16 16
+  image-color: #ffffffff
+  image-source: /images/ui/colorbox
+
+  $checked:
+    image-clip: 16 0 16 16
+
+  $!checked:
+    image-clip: 0 0 16 16
+
+ButtonBox < UICheckBox
+  font: verdana-11px-antialised
+  color: #ffffff
+  size: 71 20
+  text-offset: 0 0
+  text-align: center
+  image-source: /images/ui/button_rounded
+  image-color: white
+  image-clip: 0 0 71 20
+  image-border: 10
+  padding: 5 10 5 10
+  opacity: 1.0
+
+  $hover !disabled:
+    image-clip: 0 20 71 20
+    opacity: 0.9
+
+  $pressed:
+    image-clip: 0 40 71 20
+    text-offset: 1 1
+
+  $disabled:
+    color: #f0ad4d88
+
+ButtonBoxRounded < ButtonBox
+  image-source: /images/ui/tabbutton_rounded
+  image-border: 2

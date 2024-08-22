@@ -1,0 +1,97 @@
+GameSidePanel < UIMiniWindowContainer
+  image-source: /images/ui/panel_side
+  image-border: 4
+  padding: 4
+  width: 198
+  layout:
+    type: verticalBox
+    //spacing: 1
+
+GameBottomPanel < UIWindow
+  image-source: /images/ui/panel_bottom
+  image-border: 4
+
+GameMapPanel < UIGameMap
+  padding: 4
+  image-source: /images/ui/panel_map
+  image-border: 4
+
+  $on:
+    padding: 0
+
+UIWidget
+  id: gameRootPanel
+  anchors.fill: parent
+  anchors.top: topMenu.bottom
+
+  GameMapPanel
+    id: gameMapPanel
+    anchors.left: gameLeftPanel.right
+    anchors.right: gameRightExtraPanel.left
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
+    focusable: false
+
+    Button
+      id: showTopMenuButton
+      anchors.top: parent.top
+      anchors.left: parent.left
+      !text: tr('Show Top Menu')
+      height: 32
+      visible: false
+
+  GameBottomPanel
+    id: gameBottomPanel
+    size: 500 150
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: bottomSplitter.top
+    anchors.bottom: parent.bottom
+    margin-bottom: 20
+
+  GameSidePanel
+    id: gameLeftPanel
+    anchors.left: parent.left
+    anchors.top: parent.top
+    anchors.bottom: gameBottomPanel.bottom
+    focusable: false
+    visible: true
+    on: true
+    $!on:
+      width: 0
+      visible: false
+
+  GameSidePanel
+    id: gameRightPanel
+    anchors.right: parent.right
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
+    focusable: false
+    on: true
+
+  GameSidePanel
+    id: gameRightExtraPanel
+    anchors.right: prev.left
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
+    margin-right: 1
+    focusable: false
+    visible: true
+    on: true
+    $!on:
+      width: 0
+      visible: false
+
+  Splitter
+    id: bottomSplitter
+    width: 500
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.bottom: parent.bottom
+    relative-margin: bottom
+    margin-bottom: 200
+    @canUpdateMargin: function(self, newMargin) if modules.client_options.getOption('dontStretchShrink') then return self:getMarginBottom() end return math.max(math.min(newMargin, self:getParent():getHeight() - 300), 100) end
+    @onGeometryChange: function(self) self:setMarginBottom(math.min(math.max(self:getParent():getHeight() - 300, 100), self:getMarginBottom())) end
+
+  UIWidget
+    id: mouseGrabber
+    focusable: false
+    visible: false
